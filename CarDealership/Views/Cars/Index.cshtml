@@ -1,0 +1,10 @@
+@using CarDealership.Models
+
+@foreach (Car automobile in CarsMatchingSearch)
+{
+  <p>----------------------</p>
+  <p>@automobile.GetMakeModel()</p>
+  <p>@automobile.GetMiles() miles</p>
+  <p>$@automobile.GetPrice()</p>
+  <p>@Car.MakeSound("bang!")</p>
+}
