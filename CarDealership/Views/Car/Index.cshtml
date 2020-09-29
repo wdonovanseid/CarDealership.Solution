@@ -1,6 +1,6 @@
 @using CarDealership.Models
 
-@foreach (Car automobile in CarsMatchingSearch)
+@foreach (Car automobile in Car.CarsMatchingSearch)
 {
   <p>----------------------</p>
   <p>@automobile.GetMakeModel()</p>
@@ -8,3 +8,5 @@
   <p>$@automobile.GetPrice()</p>
   <p>@Car.MakeSound("bang!")</p>
 }
+
+<a href="/">Go to beginning</a>

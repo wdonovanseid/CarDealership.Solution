@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System;
 
 namespace CarDealership.Models {
 
@@ -9,6 +10,7 @@ namespace CarDealership.Models {
     private int _miles;
 
     private static List<Car> _instances = new List<Car> {};
+    public static List<Car> CarsMatchingSearch = new List<Car> {};
 
     public Car(string makeModel, int price, int miles)
     {
@@ -18,23 +20,33 @@ namespace CarDealership.Models {
       _instances.Add(this);
     }
 
+    public static void MakeDefaultCars()
+    {
+      Car volkswagen = new Car("1974 Volkswagen Thing", 1100, 368792);
+      Car yugo = new Car("1980 Yugo Koral", 700, 56000);
+      Car ford = new Car("1988 Ford Country Squire", 1400, 239001);
+      Car amc = new Car("1976 AMC Pacer", 400, 198000);
+    }
+
+    public static void ClearAllDefault()
+    {
+      _instances.Clear();
+    }
+
     public static List<Car> GetAll()
     {
       return _instances;
     }
 
+    public static void ClearAllSearch()
+    {
+      CarsMatchingSearch.Clear();
+    }
+
     public static List<Car> GetAllWorth(string maxPrice)
     {
       int maxPriceInt = int.Parse(maxPrice);
-      Car volkswagen = new Car("1974 Volkswagen Thing", 1100, 368792);
-      Car yugo = new Car("1980 Yugo Koral", 700, 56000);
-      Car ford = new Car("1988 Ford Country Squire", 1400, 239001);
-      Car amc = new Car("1976 AMC Pacer", 400, 198000);
-
-      List<Car> allCars = Car.GetAll();
-      List<Car> CarsMatchingSearch = new List<Car>(0);
-
-      foreach (Car automobile in allCars)
+      foreach (Car automobile in _instances)
       {
         if (automobile.WorthBuying(maxPriceInt))
         {

@@ -10,20 +10,22 @@ namespace CarDealership.Controllers
     [HttpGet("/cars")]
     public ActionResult Index()
     {
-      List<Car> allCars = Car.GetAll();
-      return View(allCars);
+      Car.ClearAllDefault();
+      return View(Car.CarsMatchingSearch);
     }
 
     [HttpGet("/cars/new")]
     public ActionResult CreateForm()
     {
+      Car.ClearAllSearch();
+      Car.MakeDefaultCars();
       return View();
     }
 
     [HttpPost("/cars")]
     public ActionResult Create(string maxPrice)
     {
-      
+      Car.GetAllWorth(maxPrice);
       return RedirectToAction("Index");
     }
 
